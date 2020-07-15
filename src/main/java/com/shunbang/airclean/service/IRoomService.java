@@ -9,5 +9,7 @@ import com.shunbang.airclean.model.vo.RoomVO;
 public interface IRoomService {
 	void add(Room room);
 
-	Pager<RoomVO> queryPage(Pager<RoomVO> pager,RoomFilter filter); 
+	Pager<RoomVO> queryPage(Pager<RoomVO> pager,RoomFilter filter);
+
+	void save(Room room); 
 }

@@ -48,9 +48,21 @@ public class RoomServiceImpl implements IRoomService{
 
 		List<RoomVO> list = roomMapper.queryPage(filter, pager.getFrom() - 1, pager.getPageSize());
 
-		pager.setList(list);
+		pager.setList(list) ;
 
 		return pager;
+	}
+
+
+	@Override
+	public void save(Room room) {
+		RoomVO roomVO = this.roomMapper.getByNo(room.getNo());
+		if(roomVO==null) {
+			this.roomMapper.insert(room);
+		}else {
+			this.roomMapper.update(room);
+		}
+		
 	}
 
 }

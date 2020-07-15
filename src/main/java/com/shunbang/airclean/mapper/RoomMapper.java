@@ -41,11 +41,19 @@ public interface RoomMapper {
 	@Select(" select count(1)  from room  ") //TODO TL添加条件
 	int getTotalCount(RoomFilter filter);
 	
-	@Select(" select no,tp ,sid,mt_tm from room limit #{from},#{count}   ") //TODO TL添加条件
+	@Select(" select no,tp ,name,mt_tm,del from room limit #{from},#{count}   ") //TODO TL添加条件
 	@Results(value = {
 			@Result(property = "type", column = "tp"),
-			@Result(property = "maintainTime", column = "mt_tm")})
+			@Result(property = "maintainTime", column = "mt_tm"),
+			@Result(property = "del", column = "delete")})
 	List<RoomVO> queryPage(RoomFilter filter, int from, int count);
+
+	@Select(" select no,tp ,name,mt_tm from room where no=#{no}   ")
+	@Results(value = {
+			@Result(property = "type", column = "tp"),
+			@Result(property = "maintainTime", column = "mt_tm"),
+			@Result(property = "del", column = "delete")})
+	RoomVO getByNo(String no);
 	
 	
 }

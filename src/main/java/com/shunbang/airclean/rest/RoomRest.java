@@ -2,7 +2,6 @@ package com.shunbang.airclean.rest;
 
 import java.sql.Timestamp;
 import java.util.Date;
-import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -28,15 +27,11 @@ public class RoomRest extends CommonRest<Object> {
 	@Resource
 	private IRoomService roomService;
 	
-	@GetMapping("/demo")
-	public SimpleMessage<Room> demo() {
-		Room room = new Room();
-		room.setNo("3353");
-		room.setType("L1");
-		room.setSid("1");
-		room.setMaintainTime(new Timestamp(new Date().getTime()) );
+	@GetMapping("/save")
+	public SimpleMessage<Room> save(Room room) {
+		 
 		SimpleMessage<Room> sm = new SimpleMessage<Room>();
-		this.roomService.add(room);
+		this.roomService.save(room);
 		sm.setMessage("保存成功");
 	    return sm;
 	}
