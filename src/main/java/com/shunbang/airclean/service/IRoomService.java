@@ -11,5 +11,7 @@ public interface IRoomService {
 
 	Pager<RoomVO> queryPage(Pager<RoomVO> pager,RoomFilter filter);
 
-	void save(Room room); 
+	void save(Room room);
+
+	void delete(String no);
 }

@@ -1,8 +1,9 @@
 package com.shunbang.airclean.model.bean;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class Room {
+public class Room implements Serializable {
 	private String no;
 	private String type;
 	private String name;

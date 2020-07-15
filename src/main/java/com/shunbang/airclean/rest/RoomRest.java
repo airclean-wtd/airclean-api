@@ -5,9 +5,7 @@ import java.util.Date;
 
 import javax.annotation.Resource;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.shunbang.airclean.common.CommonRest;
 import com.shunbang.airclean.common.Pager;
@@ -27,8 +25,8 @@ public class RoomRest extends CommonRest<Object> {
 	@Resource
 	private IRoomService roomService;
 	
-	@GetMapping("/save")
-	public SimpleMessage<Room> save(Room room) {
+	@PostMapping("/save")
+	public SimpleMessage<Room> save(@RequestBody Room room) {
 		 
 		SimpleMessage<Room> sm = new SimpleMessage<Room>();
 		this.roomService.save(room);
@@ -54,6 +52,15 @@ public class RoomRest extends CommonRest<Object> {
 		} catch (Exception e) {
 			return error(e);
 		}
+		return sm;
+	}
+
+	@GetMapping("/delete")
+	public SimpleMessage<String> delete(@RequestParam("no") String no) {
+
+		SimpleMessage<String> sm = new SimpleMessage<String>();
+		this.roomService.delete(no);
+		sm.setMessage("删除成功");
 		return sm;
 	}
 }

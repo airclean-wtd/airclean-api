@@ -65,4 +65,10 @@ public class RoomServiceImpl implements IRoomService{
 		
 	}
 
+	@Override
+	public void delete(String no) {
+
+		this.roomMapper.delete(no);
+	}
+
 }

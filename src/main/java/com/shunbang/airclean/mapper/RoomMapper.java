@@ -17,10 +17,10 @@ import com.shunbang.airclean.model.vo.RoomVO;
 @Mapper
 public interface RoomMapper {
 	
-	@Insert(" insert into room (no,tp,sid,mt_tm) values(#{no},#{type},#{sid},#{maintainTime})")
+	@Insert(" insert into room (no,tp,name,mt_tm) values(#{no},#{type},#{name},#{maintainTime})")
 	int insert(Room room);
 
-	@Update(" update room set tp = #{type},sid = #{sid},mt_tm = #{maintainTime}) where no = #{no} ")
+	@Update(" update room set tp = #{type},name = #{name},mt_tm = #{maintainTime} where no = #{no} ")
 	int update(Room room);
 	
 	@Delete(" delete from room  where no = #{no}")
