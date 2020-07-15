@@ -34,15 +34,15 @@ public class RoomRest extends CommonRest<Object> {
 	    return sm;
 	}
 	
-	//@GetMapping(value="/queryPage", produces = "application/json; charset=utf-8")
 	@GetMapping("/queryPage")
-	public SimpleMessage<?> query(Integer pageIndex,RoomFilter filter) {
+	public SimpleMessage<?> query( RoomFilter filter) {
 		 
 		SimplePageMessage<RoomVO> sm = new SimplePageMessage<RoomVO>();
 
 		try {
 			//LOGGER.debug("你要查询user");
 			Pager<RoomVO> pager = new Pager<RoomVO>();
+			Integer pageIndex = filter.getPageIndex();
 			if (pageIndex != null) {
 				pager.setPageIndex(pageIndex);
 			}
@@ -56,7 +56,7 @@ public class RoomRest extends CommonRest<Object> {
 	}
 
 	@GetMapping("/delete")
-	public SimpleMessage<String> delete(@RequestParam("no") String no) {
+	public SimpleMessage<String> delete(String no) {
 
 		SimpleMessage<String> sm = new SimpleMessage<String>();
 		this.roomService.delete(no);

@@ -1,7 +1,10 @@
 package com.shunbang.airclean.model.filter;
 
 
-public class RoomFilter {
+import java.io.Serializable;
+
+public class RoomFilter  implements Serializable {
+	private Integer pageIndex;
 	private String no;
 	private String type;
 	private String name;
@@ -14,6 +17,14 @@ public class RoomFilter {
 
 	public void setNo(String no) {
 		this.no = no;
+	}
+
+	public Integer getPageIndex() {
+		return pageIndex;
+	}
+
+	public void setPageIndex(Integer pageIndex) {
+		this.pageIndex = pageIndex;
 	}
 
 	public String getType() {

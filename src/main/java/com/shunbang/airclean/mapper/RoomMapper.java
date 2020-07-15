@@ -41,11 +41,23 @@ public interface RoomMapper {
 	@Select(" select count(1)  from room  ") //TODO TL添加条件
 	int getTotalCount(RoomFilter filter);
 	
-	@Select(" select no,tp ,name,mt_tm,del from room limit #{from},#{count}   ") //TODO TL添加条件
+	@Select("  select r.no,r.tp ,r.name,r.mt_tm,r.del,d.no as device_no,\n " +
+			"d.tp as device_tp,d.mac as device_mac,d.st as device_st\n " +
+			"from room r\n " +
+			"left join device_room_rlt dr\n " +
+			"on r.no= dr.ROOM_NO\n " +
+			"left join device d\n " +
+			"on d.no=dr.DEVICE_NO\n  " +
+			"where 1=1\n  " +
+			"limit #{from},#{count}  ") //TODO TL添加条件
 	@Results(value = {
 			@Result(property = "type", column = "tp"),
 			@Result(property = "maintainTime", column = "mt_tm"),
-			@Result(property = "del", column = "delete")})
+			@Result(property = "deviceNo", column = "device_no"),
+			@Result(property = "deviceTp", column = "device_tp"),
+			@Result(property = "deviceMac", column = "device_mac"),
+			@Result(property = "deviceSt", column = "device_st")
+	})
 	List<RoomVO> queryPage(RoomFilter filter, int from, int count);
 
 	@Select(" select no,tp ,name,mt_tm from room where no=#{no}   ")
