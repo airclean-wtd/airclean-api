@@ -10,9 +10,12 @@ import java.io.Serializable;
 public class DeviceFilter implements Serializable {
 
 	private Integer pageIndex;
-	private String key;
-	private String value;
-	private String name;
+	private String no;
+	private String tp;
+	private String sid;
+	private String ip;
+	private String mac;
+	private String st;
 
 	public Integer getPageIndex() {
 		return pageIndex;
@@ -22,27 +25,51 @@ public class DeviceFilter implements Serializable {
 		this.pageIndex = pageIndex;
 	}
 
-	public String getKey() {
-		return key;
+	public String getNo() {
+		return no;
 	}
 
-	public void setKey(String key) {
-		this.key = key;
+	public void setNo(String no) {
+		this.no = no;
 	}
 
-	public String getValue() {
-		return value;
+	public String getTp() {
+		return tp;
 	}
 
-	public void setValue(String value) {
-		this.value = value;
+	public void setTp(String tp) {
+		this.tp = tp;
 	}
 
-	public String getName() {
-		return name;
+	public String getSid() {
+		return sid;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setSid(String sid) {
+		this.sid = sid;
+	}
+
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
+	public String getMac() {
+		return mac;
+	}
+
+	public void setMac(String mac) {
+		this.mac = mac;
+	}
+
+	public String getSt() {
+		return st;
+	}
+
+	public void setSt(String st) {
+		this.st = st;
 	}
 }

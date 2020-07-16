@@ -4,11 +4,14 @@ import java.sql.Timestamp;
 
 public class Device {
 	private String no;
-	private String type;
+	private String tp;
 	private String sid;
+	private String ip;
+	private String port;
 	private String mac;
-	private String state;
-	private Timestamp maintainTime;
+	private String st;
+	private String del;
+	private Timestamp mtTm;
 
 	public String getNo() {
 		return no;
@@ -18,12 +21,12 @@ public class Device {
 		this.no = no;
 	}
 
-	public String getType() {
-		return type;
+	public String getTp() {
+		return tp;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setTp(String tp) {
+		this.tp = tp;
 	}
 
 	public String getSid() {
@@ -34,6 +37,22 @@ public class Device {
 		this.sid = sid;
 	}
 
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
+	public String getPort() {
+		return port;
+	}
+
+	public void setPort(String port) {
+		this.port = port;
+	}
+
 	public String getMac() {
 		return mac;
 	}
@@ -42,20 +61,27 @@ public class Device {
 		this.mac = mac;
 	}
 
-	public String getState() {
-		return state;
+	public String getSt() {
+		return st;
 	}
 
-	public void setState(String state) {
-		this.state = state;
+	public void setSt(String st) {
+		this.st = st;
 	}
 
-	public Timestamp getMaintainTime() {
-		return maintainTime;
+	public String getDel() {
+		return del;
 	}
 
-	public void setMaintainTime(Timestamp maintainTime) {
-		this.maintainTime = maintainTime;
+	public void setDel(String del) {
+		this.del = del;
 	}
 
+	public Timestamp getMtTm() {
+		return mtTm;
+	}
+
+	public void setMtTm(Timestamp mtTm) {
+		this.mtTm = mtTm;
+	}
 }

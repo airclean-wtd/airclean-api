@@ -59,10 +59,10 @@ public class DeviceRest  extends CommonRest<Object> {
 
     @GetMapping("/delete")
     @ApiOperation("delete删除接口")
-    public SimpleMessage<String> delete(String key) {
+    public SimpleMessage<String> delete(String no) {
 
         SimpleMessage<String> sm = new SimpleMessage<String>();
-        this.deviceService.delete(key);
+        this.deviceService.delete(no);
         sm.setMessage("删除成功");
         return sm;
     }

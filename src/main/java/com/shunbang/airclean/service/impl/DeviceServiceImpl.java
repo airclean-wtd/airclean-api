@@ -49,6 +49,6 @@ public class DeviceServiceImpl implements IDeviceService {
 
     @Override
     public void delete(String no) {
-
+        this.deviceMapper.deleteById(no);
     }
 }

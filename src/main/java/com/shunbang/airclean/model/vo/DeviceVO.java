@@ -10,22 +10,17 @@ import java.sql.Timestamp;
  */
 public class DeviceVO {
 
-	private BigInteger cfgNo;
 	private String index;
-	private String key;
-	private String name;
-	private String value;
-	private String order;
-	private Timestamp optTm;
-
-
-	public BigInteger getCfgNo() {
-		return cfgNo;
-	}
-
-	public void setCfgNo(BigInteger cfgNo) {
-		this.cfgNo = cfgNo;
-	}
+	private String no;
+	private String tp;
+	private String sid;
+	private String ip;
+	private String port;
+	private String mac;
+	private String st;
+	private String mtTm;
+	private String del;
+	private String roomName;
 
 	public String getIndex() {
 		return index;
@@ -35,43 +30,83 @@ public class DeviceVO {
 		this.index = index;
 	}
 
-	public String getKey() {
-		return key;
+	public String getNo() {
+		return no;
 	}
 
-	public void setKey(String key) {
-		this.key = key;
+	public void setNo(String no) {
+		this.no = no;
 	}
 
-	public String getValue() {
-		return value;
+	public String getTp() {
+		return tp;
 	}
 
-	public void setValue(String value) {
-		this.value = value;
+	public void setTp(String tp) {
+		this.tp = tp;
 	}
 
-	public String getOrder() {
-		return order;
+	public String getSid() {
+		return sid;
 	}
 
-	public void setOrder(String order) {
-		this.order = order;
+	public void setSid(String sid) {
+		this.sid = sid;
 	}
 
-	public String getName() {
-		return name;
+	public String getIp() {
+		return ip;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setIp(String ip) {
+		this.ip = ip;
 	}
 
-	public Timestamp getOptTm() {
-		return optTm;
+	public String getPort() {
+		return port;
 	}
 
-	public void setOptTm(Timestamp optTm) {
-		this.optTm = optTm;
+	public void setPort(String port) {
+		this.port = port;
+	}
+
+	public String getMac() {
+		return mac;
+	}
+
+	public void setMac(String mac) {
+		this.mac = mac;
+	}
+
+	public String getSt() {
+		return st;
+	}
+
+	public void setSt(String st) {
+		this.st = st;
+	}
+
+	public String getMtTm() {
+		return mtTm;
+	}
+
+	public void setMtTm(String mtTm) {
+		this.mtTm = mtTm;
+	}
+
+	public String getDel() {
+		return del;
+	}
+
+	public void setDel(String del) {
+		this.del = del;
+	}
+
+	public String getRoomName() {
+		return roomName;
+	}
+
+	public void setRoomName(String roomName) {
+		this.roomName = roomName;
 	}
 }
