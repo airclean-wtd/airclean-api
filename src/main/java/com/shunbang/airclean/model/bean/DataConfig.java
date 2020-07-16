@@ -1,9 +1,13 @@
 package com.shunbang.airclean.model.bean;
 
+import java.sql.Timestamp;
+
 public class DataConfig {
 	private String key;
 	private String value;
 	private String name;
+	private String order;
+	private Timestamp optTm;
 
 	public String getKey() {
 		return key;
@@ -29,4 +33,19 @@ public class DataConfig {
 		this.name = name;
 	}
 
+	public String getOrder() {
+		return order;
+	}
+
+	public void setOrder(String order) {
+		this.order = order;
+	}
+
+	public Timestamp getOptTm() {
+		return optTm;
+	}
+
+	public void setOptTm(Timestamp optTm) {
+		this.optTm = optTm;
+	}
 }

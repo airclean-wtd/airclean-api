@@ -1,12 +1,5 @@
 package com.shunbang.airclean.rest;
 
-import java.sql.Timestamp;
-import java.util.Date;
-
-import javax.annotation.Resource;
-
-import org.springframework.web.bind.annotation.*;
-
 import com.shunbang.airclean.common.CommonRest;
 import com.shunbang.airclean.common.Pager;
 import com.shunbang.airclean.common.SimpleMessage;
@@ -15,11 +8,16 @@ import com.shunbang.airclean.model.bean.Room;
 import com.shunbang.airclean.model.filter.RoomFilter;
 import com.shunbang.airclean.model.vo.RoomVO;
 import com.shunbang.airclean.service.IRoomService;
+import io.swagger.annotations.Api;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
  
 
 
 @RestController
 @RequestMapping("/room")
+@Api("room接口")
 public class RoomRest extends CommonRest<Object> {
 	
 	@Resource
