@@ -14,6 +14,7 @@ import com.shunbang.airclean.model.bean.Room;
 import com.shunbang.airclean.model.filter.RoomFilter;
 import com.shunbang.airclean.model.vo.RoomVO;
 import com.shunbang.airclean.service.IRoomService;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service(value = "roomService")
 public class RoomServiceImpl implements IRoomService{
@@ -30,13 +31,6 @@ public class RoomServiceImpl implements IRoomService{
 		 roomMapper.insert(room);
 		
 	}
-
-
-	/*
-	 * @Override public List<Room> query() { 
-	 *     return roomMapper.query();
-	 * }
-	 */
 
 	@Override
 	public Pager<RoomVO> queryPage(Pager<RoomVO> pager, RoomFilter filter) {
@@ -55,6 +49,7 @@ public class RoomServiceImpl implements IRoomService{
 
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public void save(Room room) {
 		RoomVO roomVO = this.roomMapper.getByNo(room.getNo());
 		if(roomVO==null) {
@@ -66,6 +61,7 @@ public class RoomServiceImpl implements IRoomService{
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public void delete(String no) {
 
 		this.roomMapper.delete(no);

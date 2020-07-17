@@ -13,6 +13,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.math.BigInteger;
+import java.util.List;
 
 @RestController
 @RequestMapping("/dataConfig")
@@ -53,12 +55,29 @@ public class DataConfigRest extends CommonRest<Object> {
         return sm;
     }
 
+
+    @GetMapping("/queryByKey")
+    @ApiOperation("queryByKey")
+    public SimpleMessage<?> queryByKey(String key) {
+
+        SimplePageMessage<DataConfigVO> sm = new SimplePageMessage<DataConfigVO>();
+
+        try {
+
+            sm.setDataList(this.dataConfigService.queryByKey(key));
+
+        } catch (Exception e) {
+            return error(e);
+        }
+        return sm;
+    }
+
     @GetMapping("/delete")
     @ApiOperation("delete删除接口")
-    public SimpleMessage<String> delete(String key) {
+    public SimpleMessage<String> delete(BigInteger cfgNo) {
 
         SimpleMessage<String> sm = new SimpleMessage<String>();
-        this.dataConfigService.delete(key);
+        this.dataConfigService.delete(cfgNo);
         sm.setMessage("删除成功");
         return sm;
     }

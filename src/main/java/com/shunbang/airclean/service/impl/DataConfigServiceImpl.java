@@ -13,7 +13,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @Service(value = "dataConfigService")
@@ -40,8 +42,9 @@ public class DataConfigServiceImpl implements IDataConfigService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void save(DataConfig dataConfig) {
-        DataConfigVO dataConfigVO = this.dataConfigMapper.queryById(dataConfig.getKey());
+        DataConfigVO dataConfigVO = this.dataConfigMapper.queryById(dataConfig.getCfgNo());
         if(dataConfigVO==null) {
             this.dataConfigMapper.insert(dataConfig);
         }else {
@@ -50,7 +53,14 @@ public class DataConfigServiceImpl implements IDataConfigService {
     }
 
     @Override
-    public void delete(String key) {
+    @Transactional(rollbackFor = Exception.class)
+    public void delete(BigInteger key) {
         this.dataConfigMapper.deleteById(key);
+    }
+
+    @Override
+    public List<DataConfigVO> queryByKey(String key) {
+
+        return this.dataConfigMapper.queryByKey(key);
     }
 }

@@ -5,6 +5,7 @@ import com.shunbang.airclean.model.filter.DataConfigFilter;
 import com.shunbang.airclean.model.vo.DataConfigVO;
 import org.apache.ibatis.annotations.*;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @Mapper
@@ -13,13 +14,28 @@ public interface DataConfigMapper {
     /**
      * 通过ID查询单条数据
      *
-     * @param key 主键
+     * @param cfgNo 主键
      * @return 实例对象
      */
     @Select(" select d.CFG_NO, d.KY, d.VAL, d.NAME, d.ODR, d.OPT_TM " +
             "        from airclean.data_config d " +
+            "        where d.CFG_NO = #{cfgNo}   ")
+    DataConfigVO queryById(BigInteger cfgNo);
+
+    /**
+     * 通过key查询数据集合
+     *
+     * @param key 主键
+     * @return 实例对象集合
+     */
+    @Select(" select d.CFG_NO, d.KY, d.VAL,d.VAL as label, d.NAME, d.ODR, d.OPT_TM " +
+            "        from airclean.data_config d " +
             "        where d.KY = #{key}   ")
-    DataConfigVO queryById(String key);
+    @Results(value = {
+            @Result(property = "key", column = "KY"),
+            @Result(property = "value", column = "VAL"),
+            @Result(property = "order", column = "odr")})
+    List<DataConfigVO> queryByKey(String key);
 
     /**
      * 查询指定行数据
@@ -36,7 +52,7 @@ public interface DataConfigMapper {
             "<if test='filter.value != null and !filter.value.isEmpty() ' > and VAL = #{filter.value} </if> "+
             "<if test='filter.name != null and !filter.name.isEmpty() ' > and NAME = #{filter.name} </if> "+
             "limit #{from},#{count}  " +
-            "</script> ") //TODO 添加条件
+            "</script> ")
     @Results(value = {
             @Result(property = "key", column = "KY"),
             @Result(property = "value", column = "VAL"),
@@ -72,19 +88,19 @@ public interface DataConfigMapper {
      * @param dataConfig 实例对象
      * @return 影响行数
      */
-    @Update(" update airclean.data_config set VAL = #{value} where KY = #{key} ")
+    @Update(" update airclean.data_config set KY = #{key}, VAL = #{value},name = #{name}  where CFG_NO = #{cfgNo} ")
     int update(DataConfig dataConfig);
 
     /**
      * 通过主键删除数据
      *
-     * @param key 主键
+     * @param cfgNo 主键
      * @return 影响行数
      */
     @Delete(" delete " +
             "        from airclean.data_config d" +
-            "        where d.KY = #{key} ")
-    int deleteById(String key);
+            "        where d.cfg_no = #{cfgNo} ")
+    int deleteById(BigInteger cfgNo);
 
     /**
      * 查询条数

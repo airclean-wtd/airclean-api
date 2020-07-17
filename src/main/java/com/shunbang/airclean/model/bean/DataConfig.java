@@ -1,13 +1,24 @@
 package com.shunbang.airclean.model.bean;
 
+import java.math.BigInteger;
 import java.sql.Timestamp;
 
 public class DataConfig {
+
+	private BigInteger cfgNo;
 	private String key;
 	private String value;
 	private String name;
 	private String order;
 	private Timestamp optTm;
+
+	public BigInteger getCfgNo() {
+		return cfgNo;
+	}
+
+	public void setCfgNo(BigInteger cfgNo) {
+		this.cfgNo = cfgNo;
+	}
 
 	public String getKey() {
 		return key;

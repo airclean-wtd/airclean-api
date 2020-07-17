@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shunbang.airclean.service.IDeviceService;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -38,9 +39,28 @@ public class DeviceServiceImpl implements IDeviceService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void save(Device device) {
         DeviceVO deviceVO = this.deviceMapper.queryById(device.getNo());
         if(deviceVO==null) {
+            //新增，根据设备类型自动生成设备编号
+
+            //查询当前最大设备编号
+            //类型
+            String deviceTp = device.getTp();
+            String curremtMaxNo=this.deviceMapper.queryMaxNoByTp(device.getIp());
+            String newDeviceNo = "";
+            if(curremtMaxNo==null||curremtMaxNo==""){
+                //命名规则：类型+no
+                newDeviceNo = deviceTp+"001";
+            }else{
+                String mxNo = curremtMaxNo.substring(curremtMaxNo.length()-3,curremtMaxNo.length());
+                String nwNo = String.format("%0" + curremtMaxNo.length() + "d", Integer.parseInt(curremtMaxNo) + 1);
+                newDeviceNo = deviceTp + nwNo;
+            }
+            //新编号=max+1
+            device.setNo(newDeviceNo);
+
             this.deviceMapper.insert(device);
         }else {
             this.deviceMapper.update(device);
@@ -48,7 +68,10 @@ public class DeviceServiceImpl implements IDeviceService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void delete(String no) {
         this.deviceMapper.deleteById(no);
     }
+
+
 }

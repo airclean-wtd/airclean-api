@@ -15,6 +15,7 @@ public class DataConfigVO {
 	private String key;
 	private String name;
 	private String value;
+	private String label;
 	private String order;
 	private Timestamp optTm;
 
@@ -33,6 +34,14 @@ public class DataConfigVO {
 
 	public void setIndex(String index) {
 		this.index = index;
+	}
+
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
 	}
 
 	public String getKey() {

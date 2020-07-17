@@ -25,6 +25,17 @@ public interface DeviceMapper {
     DeviceVO queryById(String no);
 
     /**
+     * 通过tp查询最大编号
+     *
+     * @param tp 类型
+     * @return 当前最大编号
+     */
+    @Select(" select max(no) " +
+            "        from airclean.device d " +
+            "        where d.tp = #{tp}   ")
+    String queryMaxNoByTp(String tp);
+
+    /**
      * 查询指定行数据
      *
      * @param from  查询起始位置
@@ -85,7 +96,8 @@ public interface DeviceMapper {
      * @param device 实例对象
      * @return 影响行数
      */
-    @Update(" update airclean.device set VAL = #{value} where KY = #{key} ")
+    @Update(" update airclean.device set no=#{no},tp=#{tp},sid=#{sid},ip=#{ip},port=#{port},mac=#{mac},st=#{st}" +
+            " where no = #{no} ")
     int update(Device device);
 
     /**

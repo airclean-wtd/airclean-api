@@ -5,6 +5,9 @@ import com.shunbang.airclean.model.bean.DataConfig;
 import com.shunbang.airclean.model.filter.DataConfigFilter;
 import com.shunbang.airclean.model.vo.DataConfigVO;
 
+import java.math.BigInteger;
+import java.util.List;
+
 /**
  * @author dxy
  * @date 20200716
@@ -16,5 +19,7 @@ public interface IDataConfigService {
 
     void save(DataConfig dataConfig);
 
-    void delete(String no);
+    void delete(BigInteger cfgNo);
+
+    List<DataConfigVO> queryByKey(String key);
 }
