@@ -67,4 +67,20 @@ public class DeviceRest  extends CommonRest<Object> {
         return sm;
     }
 
+    @GetMapping("/queryList")
+    @ApiOperation("queryList查询接口")
+    public SimpleMessage<?> queryList(String tp) {
+
+        SimplePageMessage<DeviceVO> sm = new SimplePageMessage<DeviceVO>();
+
+        try {
+
+            sm.setDataList(this.deviceService.queryList(tp));
+
+        } catch (Exception e) {
+            return error(e);
+        }
+        return sm;
+    }
+
 }

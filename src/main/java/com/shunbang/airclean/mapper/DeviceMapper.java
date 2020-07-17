@@ -72,13 +72,12 @@ public interface DeviceMapper {
     /**
      * 通过实体作为筛选条件查询
      *
-     * @param device 实例对象
      * @return 对象列表
      */
     @Select("select " +
-            "   no,tp,sid,ip,port,mac,st,mt_tm,del " +
-            "   from airclean.device ")
-    List<DeviceVO> queryAll(Device device);
+            "   no,no as label,tp,sid,ip,port,mac,st,mt_tm,del " +
+            "   from airclean.device where tp=#{tp} ")
+    List<DeviceVO> queryAll(String tp);
 
     /**
      * 新增数据

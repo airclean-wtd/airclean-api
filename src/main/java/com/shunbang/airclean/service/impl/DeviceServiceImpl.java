@@ -39,6 +39,13 @@ public class DeviceServiceImpl implements IDeviceService {
     }
 
     @Override
+    public List<DeviceVO> queryList(String tp) {
+
+        List<DeviceVO> list = deviceMapper.queryAll(tp);
+        return list;
+    }
+
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public void save(Device device) {
         DeviceVO deviceVO = this.deviceMapper.queryById(device.getNo());

@@ -41,7 +41,8 @@ public interface RoomMapper {
 	@Select(" select count(1)  from room  ") //TODO TL添加条件
 	int getTotalCount(RoomFilter filter);
 	
-	@Select("  select r.no,r.tp ,r.name,r.mt_tm,r.del,d.no as device_no,\n " +
+	@Select(" <script> " +
+			"select r.no,r.tp ,r.name,r.mt_tm,r.del,d.no as device_no,\n " +
 			"d.tp as device_tp,d.mac as device_mac,d.st as device_st\n " +
 			"from room r\n " +
 			"left join device_room_rlt dr\n " +
@@ -49,7 +50,13 @@ public interface RoomMapper {
 			"left join device d\n " +
 			"on d.no=dr.DEVICE_NO\n  " +
 			"where 1=1\n  " +
-			"limit #{from},#{count}  ") //TODO TL添加条件
+			"<if test='filter.no != null and !filter.no.isEmpty() ' > and r.no = #{filter.no} </if> "+
+			"<if test='filter.type != null and !filter.type.isEmpty() ' > and r.tp = #{filter.type} </if> "+
+			"<if test='filter.name != null and !filter.name.isEmpty() ' > and r.name = #{filter.name} </if> "+
+			"<if test='filter.deviceNo != null and !filter.deviceNo.isEmpty() ' > and d.no = #{filter.deviceNo} </if> "+
+			"<if test='filter.deviceMac != null and !filter.deviceMac.isEmpty() ' > and d.mac = #{filter.deviceMac} </if> "+
+			"limit #{from},#{count} " +
+			" </script> ")
 	@Results(value = {
 			@Result(property = "type", column = "tp"),
 			@Result(property = "maintainTime", column = "mt_tm"),

@@ -5,6 +5,8 @@ import com.shunbang.airclean.model.bean.Device;
 import com.shunbang.airclean.model.filter.DeviceFilter;
 import com.shunbang.airclean.model.vo.DeviceVO;
 
+import java.util.List;
+
 /**
  * @author dxy
  * @date 20200716
@@ -13,6 +15,8 @@ import com.shunbang.airclean.model.vo.DeviceVO;
 public interface IDeviceService {
 
     Pager<DeviceVO> queryPage(Pager<DeviceVO> pager, DeviceFilter filter);
+
+    List<DeviceVO> queryList(String tp);
 
     void save(Device device);
 
