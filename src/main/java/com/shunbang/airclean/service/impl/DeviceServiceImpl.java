@@ -55,14 +55,14 @@ public class DeviceServiceImpl implements IDeviceService {
             //查询当前最大设备编号
             //类型
             String deviceTp = device.getTp();
-            String curremtMaxNo=this.deviceMapper.queryMaxNoByTp(device.getIp());
+            String curremtMaxNo=this.deviceMapper.queryMaxNoByTp(deviceTp);
             String newDeviceNo = "";
             if(curremtMaxNo==null||curremtMaxNo==""){
                 //命名规则：类型+no
                 newDeviceNo = deviceTp+"001";
             }else{
                 String mxNo = curremtMaxNo.substring(curremtMaxNo.length()-3,curremtMaxNo.length());
-                String nwNo = String.format("%0" + curremtMaxNo.length() + "d", Integer.parseInt(curremtMaxNo) + 1);
+                String nwNo = String.format("%0" + curremtMaxNo.length() + "d", Integer.parseInt(mxNo) + 1);
                 newDeviceNo = deviceTp + nwNo;
             }
             //新编号=max+1
