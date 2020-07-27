@@ -53,7 +53,7 @@ public interface DeviceMapper {
             "on dr.device_no=d.no " +
             "left join room r " +
             "on dr.room_no=r.no " +
-            "where 1=1 " +
+            "where 1=1  and d.del='0' " +
             "<if test='filter.no != null and !filter.no.isEmpty() ' > and d.no = #{filter.no} </if> "+
             "<if test='filter.tp != null and !filter.tp.isEmpty() ' > and d.tp = #{filter.tp} </if> "+
             "<if test='filter.mac != null and !filter.mac.isEmpty() ' > and d.mac = #{filter.mac} </if> "+
@@ -86,7 +86,7 @@ public interface DeviceMapper {
      * @return 影响行数
      */
     @Insert(" insert into airclean.device (no,tp,sid,ip,port,mac,st,mt_tm,del) " +
-            " values (#{no}, #{tp}, #{sid}, #{ip}, #{port}, #{mac}, #{st}, #{mtTm}, #{del}) ")
+            " values (#{no}, #{tp}, #{sid}, #{ip}, #{port}, #{mac}, #{st}, CURRENT_TIMESTAMP, '0') ")
     int insert(Device device);
 
     /**
@@ -95,7 +95,7 @@ public interface DeviceMapper {
      * @param device 实例对象
      * @return 影响行数
      */
-    @Update(" update airclean.device set no=#{no},tp=#{tp},sid=#{sid},ip=#{ip},port=#{port},mac=#{mac},st=#{st}" +
+    @Update(" update airclean.device set no=#{no},tp=#{tp},sid=#{sid},ip=#{ip},port=#{port},mac=#{mac},st=#{st},mt_tm=CURRENT_TIMESTAMP" +
             " where no = #{no} ")
     int update(Device device);
 
@@ -105,9 +105,9 @@ public interface DeviceMapper {
      * @param no 主键
      * @return 影响行数
      */
-    @Delete(" delete " +
-            "        from airclean.device d" +
-            "        where d.no = #{no} ")
+    @Delete(" update " +
+            " airclean.device d  set del='1' " +
+            " where d.no = #{no} ")
     int deleteById(String no);
 
     /**

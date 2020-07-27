@@ -79,7 +79,7 @@ public interface DataConfigMapper {
      * @return 影响行数
      */
     @Insert(" insert into airclean.data_config (KY, VAL, NAME, ODR, OPT_TM) " +
-            " values (#{key}, #{value}, #{name}, #{order}, #{optTm}) ")
+            " values (#{key}, #{value}, #{name}, #{order}, CURRENT_TIMESTAMP) ")
     int insert(DataConfig dataConfig);
 
     /**
@@ -88,7 +88,7 @@ public interface DataConfigMapper {
      * @param dataConfig 实例对象
      * @return 影响行数
      */
-    @Update(" update airclean.data_config set KY = #{key}, VAL = #{value},name = #{name}  where CFG_NO = #{cfgNo} ")
+    @Update(" update airclean.data_config set KY = #{key}, VAL = #{value},name = #{name},upd_tm = CURRENT_TIMESTAMP  where CFG_NO = #{cfgNo} ")
     int update(DataConfig dataConfig);
 
     /**
