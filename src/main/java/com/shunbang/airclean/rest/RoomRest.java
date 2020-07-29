@@ -61,6 +61,10 @@ public class RoomRest extends CommonRest<Object> {
 	public SimpleMessage<String> delete(String no) {
 
 		SimpleMessage<String> sm = new SimpleMessage<String>();
+		//关系解绑
+		DeviceBindFilter filter = new DeviceBindFilter();
+		filter.setNo(no);
+		this.deviceRoomRelationService.delete(filter);
 		this.roomService.delete(no);
 		sm.setMessage("删除成功");
 		return sm;
