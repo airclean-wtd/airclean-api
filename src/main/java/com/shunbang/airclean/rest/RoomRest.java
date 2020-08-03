@@ -74,8 +74,10 @@ public class RoomRest extends CommonRest<Object> {
 	public SimpleMessage<String> bind(DeviceBindFilter filter) {
 
 		SimpleMessage<String> sm = new SimpleMessage<String>();
-		//解绑
-		this.deviceRoomRelationService.delete(filter);
+		//解绑,根据房间号解绑，设备置null
+		DeviceBindFilter filter1 = new DeviceBindFilter();
+		filter1.setNo(filter.getNo());
+		this.deviceRoomRelationService.delete(filter1);
 		//绑定
 		this.deviceRoomRelationService.save(filter);
 

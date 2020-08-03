@@ -21,7 +21,7 @@ public interface DeviceMapper {
      */
     @Select(" select no,tp,sid,ip,port,mac,st,mt_tm,del " +
             "        from airclean.device d " +
-            "        where d.no = #{no}   ")
+            "        where d.no = #{no} and d.del='0'  ")
     DeviceVO queryById(String no);
 
     /**
@@ -51,8 +51,10 @@ public interface DeviceMapper {
             "from device d " +
             "left join device_room_rlt dr " +
             "on dr.device_no=d.no " +
+            "and dr.end_tm is null  " +
             "left join room r " +
             "on dr.room_no=r.no " +
+            "and r.del='0' " +
             "where 1=1  and d.del='0' " +
             "<if test='filter.no != null and !filter.no.isEmpty() ' > and d.no = #{filter.no} </if> "+
             "<if test='filter.tp != null and !filter.tp.isEmpty() ' > and d.tp = #{filter.tp} </if> "+
@@ -62,8 +64,9 @@ public interface DeviceMapper {
             "<if test='filter.ip != null and !filter.ip.isEmpty() ' > and d.ip = #{filter.ip} </if> "+
             "limit 0,10  " +
             ") data, " +
-            "(SELECT @rownum := 0) rw  "+
-            "</script> ") //TODO 添加条件
+            "(SELECT @rownum := 0) rw  " +
+            " order by no "+
+            "</script> ")
     @Results(value = {
             @Result(property = "index", column = "rownum")})
     List<DeviceVO> queryPage(DeviceFilter filter, int from, int count);
@@ -76,7 +79,7 @@ public interface DeviceMapper {
      */
     @Select("select " +
             "   no,no as label,tp,sid,ip,port,mac,st,mt_tm,del " +
-            "   from airclean.device where tp=#{tp} ")
+            "   from airclean.device where tp=#{tp} and del='0' ")
     List<DeviceVO> queryAll(String tp);
 
     /**
@@ -87,7 +90,7 @@ public interface DeviceMapper {
      */
     @Insert(" insert into airclean.device (no,tp,sid,ip,port,mac,st,mt_tm,del) " +
             " values (#{no}, #{tp}, #{sid}, #{ip}, #{port}, #{mac}, #{st}, CURRENT_TIMESTAMP, '0') ")
-    int insert(Device device);
+    int insert(DeviceFilter device);
 
     /**
      * 修改数据
@@ -97,7 +100,7 @@ public interface DeviceMapper {
      */
     @Update(" update airclean.device set no=#{no},tp=#{tp},sid=#{sid},ip=#{ip},port=#{port},mac=#{mac},st=#{st},mt_tm=CURRENT_TIMESTAMP" +
             " where no = #{no} ")
-    int update(Device device);
+    int update(DeviceFilter device);
 
     /**
      * 通过主键删除数据

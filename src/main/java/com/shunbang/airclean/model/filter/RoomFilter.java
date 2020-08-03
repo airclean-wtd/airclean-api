@@ -10,6 +10,7 @@ public class RoomFilter  implements Serializable {
 	private String name;
 	private String deviceNo;
 	private String deviceMac;
+	private String del;
 
 	public String getNo() {
 		return no;
@@ -57,5 +58,13 @@ public class RoomFilter  implements Serializable {
 
 	public void setDeviceMac(String deviceMac) {
 		this.deviceMac = deviceMac;
+	}
+
+	public String getDel() {
+		return del;
+	}
+
+	public void setDel(String del) {
+		this.del = del;
 	}
 }

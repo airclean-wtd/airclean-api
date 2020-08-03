@@ -18,7 +18,7 @@ public interface IDeviceService {
 
     List<DeviceVO> queryList(String tp);
 
-    void save(Device device);
+    void save(DeviceFilter device);
 
     void delete(String no);
 

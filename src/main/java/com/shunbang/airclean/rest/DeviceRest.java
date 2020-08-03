@@ -7,9 +7,11 @@ import com.shunbang.airclean.common.SimplePageMessage;
 import com.shunbang.airclean.model.bean.DataConfig;
 import com.shunbang.airclean.model.bean.Device;
 import com.shunbang.airclean.model.filter.DataConfigFilter;
+import com.shunbang.airclean.model.filter.DeviceBindFilter;
 import com.shunbang.airclean.model.filter.DeviceFilter;
 import com.shunbang.airclean.model.vo.DataConfigVO;
 import com.shunbang.airclean.model.vo.DeviceVO;
+import com.shunbang.airclean.service.IDeviceRoomRelationService;
 import com.shunbang.airclean.service.IDeviceService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -25,10 +27,12 @@ public class DeviceRest  extends CommonRest<Object> {
 
     @Resource
     private IDeviceService deviceService;
+    @Resource
+    private IDeviceRoomRelationService deviceRoomRelationService;
 
     @PostMapping("/save")
     @ApiOperation("save新增修改接口")
-    public SimpleMessage<Device> save(@RequestBody Device device) {
+    public SimpleMessage<Device> save(@RequestBody DeviceFilter device) {
 
         SimpleMessage<Device> sm = new SimpleMessage<Device>();
         this.deviceService.save(device);
@@ -62,6 +66,10 @@ public class DeviceRest  extends CommonRest<Object> {
     public SimpleMessage<String> delete(String no) {
 
         SimpleMessage<String> sm = new SimpleMessage<String>();
+        //关系解绑
+        DeviceBindFilter filter = new DeviceBindFilter();
+        filter.setDeviceNo(no);
+        this.deviceRoomRelationService.delete(filter);
         this.deviceService.delete(no);
         sm.setMessage("删除成功");
         return sm;

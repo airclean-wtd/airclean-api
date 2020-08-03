@@ -16,6 +16,8 @@ public class DeviceFilter implements Serializable {
 	private String ip;
 	private String mac;
 	private String st;
+	private String port;
+	private String del;
 
 	public Integer getPageIndex() {
 		return pageIndex;
@@ -71,5 +73,21 @@ public class DeviceFilter implements Serializable {
 
 	public void setSt(String st) {
 		this.st = st;
+	}
+
+	public String getPort() {
+		return port;
+	}
+
+	public void setPort(String port) {
+		this.port = port;
+	}
+
+	public String getDel() {
+		return del;
+	}
+
+	public void setDel(String del) {
+		this.del = del;
 	}
 }

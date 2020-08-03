@@ -47,7 +47,7 @@ public class DeviceServiceImpl implements IDeviceService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void save(Device device) {
+    public void save(DeviceFilter device) {
         DeviceVO deviceVO = this.deviceMapper.queryById(device.getNo());
         if(deviceVO==null) {
             //新增，根据设备类型自动生成设备编号
@@ -62,7 +62,7 @@ public class DeviceServiceImpl implements IDeviceService {
                 newDeviceNo = deviceTp+"001";
             }else{
                 String mxNo = curremtMaxNo.substring(curremtMaxNo.length()-3,curremtMaxNo.length());
-                String nwNo = String.format("%0" + curremtMaxNo.length() + "d", Integer.parseInt(mxNo) + 1);
+                String nwNo = String.format("%0" + mxNo.length() + "d", Integer.parseInt(mxNo) + 1);
                 newDeviceNo = deviceTp + nwNo;
             }
             //新编号=max+1
@@ -79,6 +79,5 @@ public class DeviceServiceImpl implements IDeviceService {
     public void delete(String no) {
         this.deviceMapper.deleteById(no);
     }
-
 
 }
