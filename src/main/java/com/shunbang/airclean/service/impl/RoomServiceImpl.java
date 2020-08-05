@@ -67,4 +67,9 @@ public class RoomServiceImpl implements IRoomService{
 		this.roomMapper.delete(no);
 	}
 
+	@Override
+	public List<RoomVO> queryRoomList() {
+		return this.roomMapper.queryRoomList();
+	}
+
 }

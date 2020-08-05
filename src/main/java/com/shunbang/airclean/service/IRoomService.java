@@ -7,6 +7,8 @@ import com.shunbang.airclean.model.filter.DeviceBindFilter;
 import com.shunbang.airclean.model.filter.RoomFilter;
 import com.shunbang.airclean.model.vo.RoomVO;
 
+import java.util.List;
+
 public interface IRoomService {
 	void add(Room room);
 
@@ -15,4 +17,6 @@ public interface IRoomService {
 	void save(Room room);
 
 	void delete(String no);
+
+	List<RoomVO> queryRoomList();
 }

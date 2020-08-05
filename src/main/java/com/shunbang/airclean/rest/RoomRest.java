@@ -7,10 +7,13 @@ import com.shunbang.airclean.common.SimplePageMessage;
 import com.shunbang.airclean.model.bean.Room;
 import com.shunbang.airclean.model.filter.DeviceBindFilter;
 import com.shunbang.airclean.model.filter.RoomFilter;
+import com.shunbang.airclean.model.filter.StatFilter;
 import com.shunbang.airclean.model.vo.RoomVO;
+import com.shunbang.airclean.model.vo.StatVO;
 import com.shunbang.airclean.service.IDeviceRoomRelationService;
 import com.shunbang.airclean.service.IRoomService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -82,6 +85,23 @@ public class RoomRest extends CommonRest<Object> {
 		this.deviceRoomRelationService.save(filter);
 
 		sm.setMessage("设备绑定成功");
+		return sm;
+	}
+
+	@GetMapping("/queryRoomList")
+	@ApiOperation("queryRoomList查询接口")
+	public SimpleMessage<?> queryRoomList(RoomFilter filter) {
+
+		SimplePageMessage<RoomVO> sm = new SimplePageMessage<RoomVO>();
+
+		try {
+
+			//保存list
+			sm.setDataList(this.roomService.queryRoomList());
+
+		} catch (Exception e) {
+			return error(e);
+		}
 		return sm;
 	}
 }

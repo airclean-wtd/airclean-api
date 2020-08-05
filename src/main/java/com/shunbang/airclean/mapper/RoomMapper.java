@@ -76,6 +76,8 @@ public interface RoomMapper {
 			@Result(property = "maintainTime", column = "mt_tm"),
 			@Result(property = "del", column = "delete")})
 	RoomVO getByNo(String no);
-	
-	
+
+
+	@Select(" select no,name  from room  where del = '0' ")
+	List<RoomVO> queryRoomList();
 }
